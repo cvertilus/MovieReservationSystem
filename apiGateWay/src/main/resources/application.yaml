@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: apiGateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: authService
+          uri: lb://authService
+          predicates:
+            - Path=/auth/**,/users/**
+      default-filters:
+        - TokenRelay
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:8080/realms/MovieReservationSystem
+
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+    endpoint:
+      health:
+        show-details: always
+
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://eureka-server:8761/eureka/,http://localhost:8762/eureka/
+      instance:
+        prefer-ip-address: true
+        hostname: localhost
+        instante-id: ${spring.application.name}:${server.port}
+
+server:
+  port: 8081

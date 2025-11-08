@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:13
+    container_name: db_movie
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres1234
+      POSTGRES_DB: db_movie_reservation_system
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+
+  Keycloak:
+    image: quay.io/keycloak/keycloak:26.1.2
+    container_name: keycloak
+    ports:
+        - "8080:8080"
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_DB=dev-file
+      - KC_CACHE=local
+    command:
+      - start-dev
+    volumes:
+      - ./data/keycloak:/opt/keycloak/data
+
+

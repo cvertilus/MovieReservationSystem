@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: AuthUserService
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/MovieReservationSystem
+server:
+  port: 8082
+
+#Keycloak configuration
+app:
+    keycloak:
+        serverurl: http://localhost:8080/
+        realm: MovieReservationSystem
+        clientid: authUserService
+        secret: jufEyASA8asc0MyOofiKraBPmkF4KMxo
+
+eureka:
+  client:
+    service-url:
+        defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    endpoint:
+        health:
+        show-details: always
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
