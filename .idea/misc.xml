@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/apiGateWay/apiGateWay/pom.xml" />
         <option value="$PROJECT_DIR$/AuthUserService/AuthUserService/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/eurekaClient/pom.xml" />
+        <option value="$PROJECT_DIR$/movieService/pom.xml" />
       </list>
     </option>
   </component>

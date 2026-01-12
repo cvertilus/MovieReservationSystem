@@ -5,8 +5,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: authService
-          uri: lb://authService
+        - id: AuthUserService
+          uri: lb://AuthUserService
           predicates:
             - Path=/auth/**,/users/**
       default-filters:
@@ -17,7 +17,7 @@ spring:
         jwt:
           issuer-uri: http://keycloak:8080/realms/MovieReservationSystem
 
-  management:
+management:
     endpoints:
       web:
         exposure:
@@ -25,15 +25,16 @@ spring:
     endpoint:
       health:
         show-details: always
+      info:
+        enabled: true
 
-  eureka:
-    client:
-      service-url:
-        defaultZone: http://eureka-server:8761/eureka/,http://localhost:8762/eureka/
-      instance:
-        prefer-ip-address: true
-        hostname: localhost
-        instante-id: ${spring.application.name}:${server.port}
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
 
 server:
   port: 8081
