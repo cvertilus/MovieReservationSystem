@@ -1,5 +1,6 @@
 package com.MovieReservationSystem.movieService.dto;
 
+import com.MovieReservationSystem.movieService.model.Auditorium;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Builder
 @Data
@@ -24,6 +26,6 @@ public class ShowTimeRequest {
 
     @NotNull(message = "Auditorium cannot be null")
     @NotBlank(message = "Auditorium cannot be blank")
-    private String auditorium;
+    private Collection<Auditorium> auditorium;
 
 }

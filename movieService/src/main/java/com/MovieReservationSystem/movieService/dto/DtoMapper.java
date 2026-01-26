@@ -1,5 +1,6 @@
 package com.MovieReservationSystem.movieService.dto;
 
+import com.MovieReservationSystem.movieService.model.Auditorium;
 import com.MovieReservationSystem.movieService.model.Genre;
 import com.MovieReservationSystem.movieService.model.Movie;
 import com.MovieReservationSystem.movieService.model.Showtime;
@@ -78,7 +79,20 @@ public class DtoMapper {
     }
 
 
+    public Auditorium toAuditorium(AuditoriumRequest auditoriumRequest) {
+        return Auditorium.builder()
+                .name(auditoriumRequest.getName())
+                .capacity(auditoriumRequest.getCapacity())
+                .build();
+    }
 
+    public AuditoriumResponse toAuditoriumResponse(Auditorium auditorium) {
+        return AuditoriumResponse.builder()
+                .id(auditorium.getId())
+                .name(auditorium.getName())
+                .capacity(auditorium.getCapacity())
+                .build();
+    }
 
 
 }
