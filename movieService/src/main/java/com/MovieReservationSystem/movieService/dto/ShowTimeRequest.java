@@ -26,6 +26,6 @@ public class ShowTimeRequest {
 
     @NotNull(message = "Auditorium cannot be null")
     @NotBlank(message = "Auditorium cannot be blank")
-    private Collection<Auditorium> auditorium;
+    private int auditoriumId;
 
 }

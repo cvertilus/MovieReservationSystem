@@ -49,17 +49,18 @@ public class DtoMapper {
                 .id(showtime.getId())
                 .startTime(showtime.getStartTime())
                 .endTime(showtime.getEndTime())
-                .auditorium(showtime.getAuditorium())
+                .auditorium(showtime.getAuditorium().getName())
                 .movieTitle(movie!= null ? movie.getTitle() : "Sin pelicula asignada")
                 .build();
 
     }
 
     public Showtime toShowtime(ShowTimeRequest showtimeRequest, Movie movie) {
+             //agregar auditorium PARA SOLUCIONAR DESPUES
         return Showtime.builder()
                 .startTime(showtimeRequest.getStartTime())
                 .endTime(showtimeRequest.getEndTime())
-                .auditorium(showtimeRequest.getAuditorium())
+                .auditorium(null)//agregar auditorium PARA SOLUCIONAR DESPUES
                 .movie(movie)
                 .build();
     }
@@ -68,7 +69,7 @@ public class DtoMapper {
         return ShowtimeResponseShort.builder()
                 .startTime(showtime.getStartTime())
                 .endTime(showtime.getEndTime())
-                .auditorium(showtime.getAuditorium())
+                .auditorium(showtime.getAuditorium().getName())
                 .build();
     }
 
