@@ -1,13 +1,12 @@
 package com.MovieReservationSystem.movieService.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.MovieReservationSystem.movieService.model.Auditorium;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Getter
 @Setter
@@ -29,7 +28,7 @@ public class Showtime {
     @JoinColumn(name="movie_id", nullable=false)
     private Movie movie;
 
-    @Builder.Default
+
     @ManyToOne
     @JoinColumn(name = "auditorium_id")
     @JsonBackReference // El "hijo" oculta la referencia en el JSON para evitar bucles

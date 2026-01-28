@@ -3,6 +3,7 @@ package com.MovieReservationSystem.movieService.service;
 import com.MovieReservationSystem.movieService.dto.DtoMapper;
 import com.MovieReservationSystem.movieService.dto.ShowTimeRequest;
 import com.MovieReservationSystem.movieService.dto.ShowtimeResponse;
+import com.MovieReservationSystem.movieService.model.Auditorium;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import com.MovieReservationSystem.movieService.model.Movie;
@@ -19,6 +20,7 @@ public class ShowtimeService {
     private final ShowtimeRepository showtimeRepository;
     private final DtoMapper mapper;
     private final MovieService movieService;
+    private final AuditoriumService auditoriumService;
 
 
 
@@ -35,7 +37,8 @@ public class ShowtimeService {
     @Transactional
     public ShowtimeResponse createShowtime(ShowTimeRequest showTimeRequest, Long movieId) {
         Movie movie = movieService.getMovieById(movieId);
-        Showtime showtime = mapper.toShowtime(showTimeRequest, movie);
+        Auditorium auditorium = auditoriumService.getAuditoriumEntityById(showTimeRequest.getAuditoriumId());
+        Showtime showtime = mapper.toShowtime(showTimeRequest, movie, auditorium);
         Showtime savedShowtime = showtimeRepository.save(showtime);
         return mapper.toShowtimeResponse(savedShowtime);
     }
@@ -44,8 +47,13 @@ public class ShowtimeService {
     public void deleteShowtime(Long id) {
         Showtime showtime = showtimeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No showtime found with id " + id));
         Movie movie = showtime.getMovie();
+
         if (movie != null) {
             movie.removeShowtime(showtime);
+        }
+        Auditorium auditorium = showtime.getAuditorium();
+        if (auditorium != null) {
+            auditorium.removeShowtime(showtime);
         }
         showtimeRepository.delete(showtime);
     }

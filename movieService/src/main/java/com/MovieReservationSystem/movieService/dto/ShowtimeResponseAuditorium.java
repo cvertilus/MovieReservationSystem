@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ShowtimeResponseAuditorium {
-    private LocalDateTime StartTime;
+    private LocalDateTime startTime;
     private LocalDateTime EndTime;
-    private String MovieTitle;
+    private Long idShowtime;
 }

@@ -1,9 +1,7 @@
 package com.MovieReservationSystem.movieService.dto;
 
 import com.MovieReservationSystem.movieService.model.Auditorium;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +23,6 @@ public class ShowTimeRequest {
     private LocalDateTime endTime;
 
     @NotNull(message = "Auditorium cannot be null")
-    @NotBlank(message = "Auditorium cannot be blank")
-    private int auditoriumId;
+    private Long auditoriumId;
 
 }

@@ -55,12 +55,12 @@ public class DtoMapper {
 
     }
 
-    public Showtime toShowtime(ShowTimeRequest showtimeRequest, Movie movie) {
+    public Showtime toShowtime(ShowTimeRequest showtimeRequest, Movie movie, Auditorium auditorium) {
              //agregar auditorium PARA SOLUCIONAR DESPUES
         return Showtime.builder()
                 .startTime(showtimeRequest.getStartTime())
                 .endTime(showtimeRequest.getEndTime())
-                .auditorium(null)//agregar auditorium PARA SOLUCIONAR DESPUES
+                .auditorium(auditorium)//agregar auditorium PARA SOLUCIONAR DESPUES
                 .movie(movie)
                 .build();
     }
@@ -88,10 +88,22 @@ public class DtoMapper {
     }
 
     public AuditoriumResponse toAuditoriumResponse(Auditorium auditorium) {
+ List <ShowtimeResponseAuditorium> showtimeResponses = auditorium.getShowtimes().stream()
+                .map(this::toShowtimeResponseAuditorium)
+                .toList();
         return AuditoriumResponse.builder()
                 .id(auditorium.getId())
                 .name(auditorium.getName())
                 .capacity(auditorium.getCapacity())
+                .Showtime(showtimeResponses)
+                .build();
+    }
+
+    public ShowtimeResponseAuditorium toShowtimeResponseAuditorium(Showtime showtime) {
+        return ShowtimeResponseAuditorium.builder()
+                .startTime(showtime.getStartTime())
+                .EndTime(showtime.getEndTime())
+                .idShowtime(showtime.getId())
                 .build();
     }
 

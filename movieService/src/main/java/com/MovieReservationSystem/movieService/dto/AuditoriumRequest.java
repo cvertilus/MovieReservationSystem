@@ -12,7 +12,6 @@ import lombok.Data;
 @Builder
 @Data
 @AllArgsConstructor
-
 public class AuditoriumRequest {
     @NotNull(message=" Name cannot be null")
    @NotBlank(message=" Name cannot be blank")
